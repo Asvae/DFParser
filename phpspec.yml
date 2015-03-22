@@ -1,0 +1,6 @@
+suites:
+    asva_suite:
+        namespace: Asva\DFParser
+        psr4_prefix: Asva\DFParser
+        src_path: app\src
+        spec_prefix: spec
