@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Src;
+
 use Illuminate\Support\Facades\Config;
 
 class sfTest extends \TestCase
