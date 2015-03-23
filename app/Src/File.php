@@ -16,13 +16,16 @@ class File
 
     /**
      * @param string  $path
-     * @param Factory $factory
      */
-	public function __construct ($path, Factory $factory)
+	public function __construct ($path)
     {
         $this->path = $path;
-        $this->factory = $factory;
 	}
+
+    public function getFactory(Factory $factory)
+    {
+        return $factory;
+    }
 
     /**
      * Core function, performs every action required

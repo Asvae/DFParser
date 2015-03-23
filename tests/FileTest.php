@@ -1,6 +1,6 @@
 <?php
 
-namespace Asva\DFParser;
+namespace App\Src;
 
 class FileTest extends \TestCase
 {
@@ -9,9 +9,9 @@ class FileTest extends \TestCase
     public function setUp()
     {
         parent::setUp();
-        $factory = new Factory();
-        $path = '/home/vagrant/Code/dfparser/spec/test_raws/MW/!test.txt';
-        $this->file = $factory->create('Asva\DFParser\File', ['path'=>$path]);
+        $path = '/home/vagrant/Code/DFParser/tests/raw/short/MW/!test.txt';
+
+        $this->file = new File($path);
     }
 
     public function tearDown()
@@ -22,7 +22,7 @@ class FileTest extends \TestCase
     /** @test **/
     public function it_is_initializable()
     {
-        $this->assertInstanceOf('Asva\DFParser\File', $this->file);
+        $this->assertInstanceOf('App\Src\File', $this->file);
     }
 
     /** @test */
@@ -44,22 +44,22 @@ class FileTest extends \TestCase
     /** @test */
     public function it_fetches_object()
     {
-        $this->file->path = '/home/vagrant/Code/dfparser/spec/test_raws/!test1.txt';
+        $this->file->path = '/home/vagrant/Code/DFParser/tests/raw/short/!test1.txt';
         $this->file->loadText()
             ->masterworkRawFix()
-            ->fetchObject();
+            ->formArray();
         $this->assertEquals("BUILDING", $this->file->bObj['string']);
     }
 
     /** @test */
     public function it_splits_by_object()
     {
-        $this->file->path = '/home/vagrant/Code/dfparser/spec/test_raws/!test2.txt';
+        $this->file->path = '/home/vagrant/Code/DFParser/tests/raw/short/!test2.txt';
         $this->file->loadText()
             ->masterworkRawFix()
-            ->fetchObject()
+            ->formArray()
             ->splitByObject();
         $this->assertEquals('BODY', $this->file->bObj['string']);
-        $this->assertEquals(3, count($this->file->item));
+        $this->assertEquals(3, count($this->file->items));
     }
 }

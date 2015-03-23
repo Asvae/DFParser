@@ -31,8 +31,6 @@ class AppServiceProvider extends ServiceProvider {
 			'App\Services\Registrar'
 		);
 
-        // $this->app->singleton('\App\Src\Factory');
-
         $this->app->singleton('\App\Src\Factory', function()
         {
             return new Factory();
