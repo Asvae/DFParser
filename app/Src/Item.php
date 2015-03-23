@@ -387,7 +387,7 @@ class Item
             else
             {
                 $token = 'item_' . strtolower($item[2]);
-                $files = $this->factory->loadFilesWithToken($token);
+                $files = $this->file->getFactory()->loadFilesWithToken($token);
                 foreach($files as $key => $file)
                     foreach($file->item as $single_item)
                         if ($single_item->sObj[1] === $item[3]

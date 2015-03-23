@@ -1,6 +1,6 @@
 <?php
 
-namespace Asva\DFParser;
+namespace App\Src;
 
 class ReactionTest extends \TestCase
 {
@@ -17,10 +17,10 @@ class ReactionTest extends \TestCase
     {
         parent::setUp();
         $factory = new Factory();
-        $path = '/home/vagrant/Code/dfparser/spec/test_raws/reaction.txt';
-        $file = $factory->create('Asva\DFParser\File', ['path'=>$path]);
+        $path = '/home/vagrant/Code/DFParser/tests/raw/short/reaction.txt';
+        $file = $factory->newFile($path);
         $file->loadEverything();
-        $this->item = $file->item[0];
+        $this->item = $file->items[0];
         $this->item->process();
     }
 
@@ -32,7 +32,7 @@ class ReactionTest extends \TestCase
     /** @test **/
     public function it_is_initializable()
     {
-        $this->assertInstanceOf('Asva\DFParser\Item', $this->item);
+        $this->assertInstanceOf('App\Src\Item', $this->item);
     }
 
     /** @test **/
