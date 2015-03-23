@@ -14,6 +14,8 @@ return [
     // Simple items, that don't have personal files (taken from dwarffortresswiki.org/index.php/DF2012:Item_token)
     'simple_item' => array('BAR','SMALLGEM'=>'Cut gem','BLOCKS','ROUGH'=>'Rough gem','BOULDER','WOOD' => 'Log','DOOR','FLOODGATE','BED','CHAIR','CHAIN','FLASK','GOBLET','WINDOW','CAGE','BARREL','BUCKET','ANIMALTRAP'=>'Animal trap','TABLE','COFFIN','STATUE','CORPSE','BOX','BIN','ARMORSTAND','WEAPONRACK'=>'Weapon rack','CABINET','FIGURINE','AMULET','SCEPTER','CROWN','RING','EARRING','BRACELET','GEM','ANVIL','CORPSEPIECE'=>'Body part','REMAINS'=>'Vermin remains','MEAT','FISH','FISH_RAW'=>'Raw fish','VERMIN'=>'Live vermin','PET'=>'Tame vermin','SEEDS','PLANT','SKIN_TANNED'=>'Leather','LEAVES','THREAD','CLOTH','TOTEM','PANTS','BACKPACK','QUIVER','CATAPULTPARTS'=>'Catapult part','BALLISTAPARTS'=>'Ballista parts','SIEGEAMMO'=>'Siege ammo','BALLISTAARROWHEAD'=>'Ballista arrow head','TRAPPARTS'=>'Mechanism','DRINK','POWDER_MISC'=>'Powder','CHEESE','LIQUID_MISC'=>'Liquid','COIN','GLOB'=>'Tallow','ROCK'=>'Small rock','PIPE_SECTION'=>'Pipe section','HATCH_COVER'=>'Hatch cover','GRATE','QUERN','MILLSTONE','SPLINT','CRUTCH','TRACTION_BENCH'=>'Traction bench','ORTHOPEDIC_CAST'=>'Orthopedic cast','SLAB','EGG','BOOK'),
 
+    // make array from object, allowing comparison with actual tags
+    // check http://dwarffortresswiki.org/index.php/DF2012:Raw_file
     'file_map' => [
         'BUILDING' => ['BUILDING_FURNACE', 'BUILDING_WORKSHOP'],
         'LANGUAGE' => ['SYMBOL', 'WORD'],

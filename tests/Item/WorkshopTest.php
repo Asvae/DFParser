@@ -36,7 +36,7 @@ class WorkshopTest extends \TestCase
     }
 //
     /** @test **/
-    public function it_processes_array_to_html_for_everything()
+    public function it_processes_array_to_html_for_every_item()
     {
         $this->assertTrue(is_array($this->item->name['array'][0]));
         $this->assertTrue(isset($this->item->color['html']));

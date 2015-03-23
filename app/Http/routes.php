@@ -21,7 +21,8 @@ Route::controllers([
 ]);
 
 Route::get('workshops', 'WorkshopController@index');
+Route::get('workshops/populate', 'WorkshopController@populate');
 Route::get('workshops/{id}', 'WorkshopController@show');
 
 // Logs to be tested
-// Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');

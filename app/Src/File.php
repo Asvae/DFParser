@@ -68,18 +68,6 @@ class File
         $string = $this->bObj['string'] = substr($text, $start, $end - $start);
         $this->text = str_replace('[OBJECT:'. $string. ']', "", $text);
 
-        // make array from object, allowing comparison with actual tags
-        // check http://dwarffortresswiki.org/index.php/DF2012:Raw_file
-
-        $a = [
-            'BUILDING' => ['BUILDING_FURNACE', 'BUILDING_WORKSHOP'],
-            'LANGUAGE' => ['SYMBOL', 'WORD'],
-            'ITEM' => ['ITEM_AMMO', 'ITEM_ARMOR', 'ITEM_FOOD',
-                'ITEM_GLOVES', 'ITEM_HELM', 'ITEM_INSTRUMENT', 'ITEM_PANTS',
-                'ITEM_SHIELD', 'ITEM_SHOES', 'ITEM_SIEGEAMMO', 'ITEM_TOOL',
-                'ITEM_TOY', 'ITEM_TRAPCOMP', 'ITEM_WEAPONSYMBOL'],
-        ];
-
         $file_map = \Config::get('constants.file_map');
 
         if (isset($file_map[$string]))

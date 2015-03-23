@@ -1,8 +1,10 @@
 <?php namespace App\Http\Controllers;
 
+use App\Dfparser;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Src\Factory;
 use Illuminate\Http\Request;
 
 class WorkshopController extends Controller {
@@ -17,23 +19,25 @@ class WorkshopController extends Controller {
         // Check for workshops in db
 
 
-        $factory = new \Asva\DFParser\Factory();
-        $factory->loadFilesWithToken('building');
-        foreach ($factory->link as $link){
-            if (is_a($link, 'Asva\DFParser\Item')
-                && isset($link->name['string'])){
-                $files = new \App\Dfparser();
-                $files->file = $link->file->path;
-                $files->item = $link->sObj[1];
-                $files->save();
-                dd($files->id);
-            }
+//        $factory = new Factory();
+//        $factory->loadFilesWithToken('building');
+//
+//
+//        foreach ($factory->files as $file)
+//            foreach ($file->items as $item){
+//                if (! isset($item->name['string']))
+//                    continue;
+//                $files = new Dfparser();
+//                $files->file = $link->file->path;
+//                $files->item = $link->sObj[1];
+//                $files->save();
+//                dd($files->id);
+//            }
+//
+//        $data = '<p>'.implode($data,'</p><p>').'</p>';
+        dd(Dfparser::all());
 
-        }
-
-        $data = '<p>'.implode($data,'</p><p>').'</p>';
-
-        return view('dfparser/workshop',compact('data'));
+        return view('dfparser/workshop/index',compact('data'));
 
 	}
 
@@ -67,7 +71,7 @@ class WorkshopController extends Controller {
 	{
         $path = 'building_test';
         $full_path = '/home/vagrant/Code/dfparser/tests/real/'.$path.'.txt';
-        $files = \App\Dfparser::find(['file' => $full_path]);
+        $files = Dfparser::find(['file' => $full_path]);
 
         if ($files->isEmpty()) {}
 	}
