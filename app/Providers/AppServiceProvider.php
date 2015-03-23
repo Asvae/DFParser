@@ -1,5 +1,6 @@
 <?php namespace App\Providers;
 
+use App\Src\Factory;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider {
@@ -29,6 +30,14 @@ class AppServiceProvider extends ServiceProvider {
 			'Illuminate\Contracts\Auth\Registrar',
 			'App\Services\Registrar'
 		);
+
+        // $this->app->singleton('\App\Src\Factory');
+
+        $this->app->singleton('\App\Src\Factory', function()
+        {
+            return new Factory();
+        });
+
 	}
 
 }

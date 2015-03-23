@@ -5,37 +5,20 @@ namespace App\Src;
 class Factory{
 
     /**
-     * Array containing references to created objects
+     * Array of created Files
      * @var array
      */
-    public $link;
+    public $files;
 
     /**
      * Constructor
      */
     public function __construct() {
-        $this->link = [];
-    }
-
-    public function loadFilesWithToken($token = ''){
-        if ( ! $token)
-            return [];
-
-        $files = glob('/home/vagrant/Code/dfparser/tests/real/'.$token.'*');
-        if (! $files)
-            return [];
-
-        $file_references = [];
-        foreach($files as $path){
-            $file_references[$path] = $this->getFile($path);
-            $file_references[$path]->loadEverything();
-        }
-
-        return $file_references;
+        $this->files = [];
     }
 
     /**
-     * Get File object with name
+     * Get File object with name or create if doesn't exist.
      *
      * @param string $path
      * @return bool
@@ -45,103 +28,70 @@ class Factory{
         if( ! (is_string($path) && $path))
             return false;
 
-        // Check if such an object is already present.
-        // Return object reference if so.
-        foreach ($this->link as $link){
-            if (isset($link->path) && $link->path === $path)
-                return $link;
+        // Check if file is already loaded
+        // and return if it's clearly so.
+        foreach ($this->files as $file){
+            if ($file->path === $path)
+                return $file;
         }
 
-        // Otherwise create new object
-        return $this->create('Asva\DFParser\File', ['path' => $path]);
+        // Otherwise create new object.
+        return $this->newFile($path);
     }
 
     /**
-     * Links object to factory so that you can access
-     * object from factory and vice versa
+     * Make file from string
      *
-     * @param $fruit
+     * @param string $path
      *
-     * @return mixed
+     * @return File|bool
      */
-    protected function linkObject($fruit){
-        $this->link[] = $fruit;
-        $fruit->factory = $this;
-        return $fruit;
+    public function newFile($path = ''){
+
+        // Return false if wrong path
+        if ( ! $this->validatePath ($path))
+            return sf::setTest(3, 'Invalid path to file: "'.$path.'".');
+
+        $file = new File($path, $this);
+        $this->files[] = $file;
+        return $file;
     }
 
     /**
-     * Pass an instance from object name string
+     * validate path
      *
-     * @param string $ClassName
-     * @param array  $params
+     * @param string $path
      *
-     * @return object $ClassName
-     */
-    public function create($ClassName, $params=[])
-    {
-        // Validation
-        if( ! $this->validate($ClassName, $params)) return false;
-
-        // Create object
-        $object = $this->makeObject($ClassName, $params);
-
-        // Create a reference link from factory.
-        // Return created object
-        return $this->linkObject($object);
-    }
-
-    /**
-     * Instantiate passed class with params
-     *
-     * @param string $ClassName
-     * @param array  $params
-     * @return object
-     */
-    protected function makeObject ($ClassName, $params)
-    {
-        return (new \ReflectionClass($ClassName))
-            ->newInstanceArgs($params);
-    }
-
-    /**
-     * Validator helper function.
-     * You get true if everything's fine. False otherwise.
-     * Check the session log for wrongs.
-     *
-     * @param $ClassName    MUST be valid
-     * @param $params       if validator is defined MUST be valid
      * @return bool
      */
-    protected function validate(&$ClassName, $params)
-    {
-        // Trying to fix ClassName if it's wrong
-        if( ! (Validate::className($ClassName))) {
-            $ClassName_prefixed = __NAMESPACE__ . '\\' . $ClassName;
-
-            // Wrong ClassName is no no, naturally
-            if (!(Validate::className($ClassName_prefixed))) {
-                return false;
-            } else {
-                $ClassName = $ClassName_prefixed;
-            }
-        }
-
-        // Now for params
-        if ($params) foreach ($params as $key=>$param) {
-
-            // 1. Return validation result if there is an according method
-            if( method_exists ( 'Asva\DFParser\Validate', $key ))
-                return Validate::$key($param);
-
-            // 2. Pass and log everything else
-            sf::setTest(2,
-                'Parameter without validation passed'.
-                ' for class creation: "Key: '.$key.
-                ' Value:'.'".');
-
-        }
-
+    public static function validatePath ($path = ''){
+        if ( ! file_exists ($path))
+            return false;
         return true;
+    }
+
+    /**
+     * Load files first part of which corresponds with token
+     * TODO move default folder to some other file
+     *
+     * @param string $token
+     *
+     * @return array
+     */
+    public function loadFilesWithToken($token = ''){
+        if ( ! $token)
+            return [];
+
+        $files = glob('/home/vagrant/Code/DFParser/tests/raw/real/'.$token.'*');
+        if (! $files)
+            return [];
+
+        $file_references = [];
+        foreach($files as $path){
+            $file_references[$path] = $this->newFile($path);
+            $file_references[$path]->loadEverything();
+        }
+
+        return $file_references;
     }
 }

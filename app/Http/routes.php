@@ -22,3 +22,5 @@ Route::controllers([
 
 Route::get('workshops', 'WorkshopController@index');
 Route::get('workshops/{id}', 'WorkshopController@show');
+
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');

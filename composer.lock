@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0f16d906b198f55b59083407464e3afa",
+    "hash": "a4c73be26d196672ca333c7cad5fb936",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -979,6 +979,49 @@
                 "shell"
             ],
             "time": "2015-03-17 15:17:33"
+        },
+        {
+            "name": "rap2hpoutre/laravel-log-viewer",
+            "version": "v0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rap2hpoutre/laravel-log-viewer.git",
+                "reference": "c3dd1df5fc8e4a5e851509cc43cba6dccc8b4c49"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rap2hpoutre/laravel-log-viewer/zipball/c3dd1df5fc8e4a5e851509cc43cba6dccc8b4c49",
+                "reference": "c3dd1df5fc8e4a5e851509cc43cba6dccc8b4c49",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "4.2.*|5.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/controllers"
+                ],
+                "psr-0": {
+                    "Rap2hpoutre\\LaravelLogViewer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "rap2hpoutre",
+                    "email": "raphael@ornikar.com"
+                }
+            ],
+            "description": "A Laravel log reader",
+            "keywords": [
+                "log",
+                "log-reader",
+                "log-viewer",
+                "logging"
+            ],
+            "time": "2015-03-23 10:42:59"
         },
         {
             "name": "swiftmailer/swiftmailer",

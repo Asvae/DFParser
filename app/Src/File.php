@@ -1,6 +1,7 @@
 <?php
 
-namespace app\Src\DFParser;
+namespace App\Src;
+
 
 /**
  * File class which corresponds to txt file.
@@ -14,14 +15,18 @@ class File
 	public $path = '';
     public $text = '';
     public $bObj = [];
-    public $item = [];
+    public $items = [];
 
     /**
-     * Construstor
+     * Constructor
+     *
+     * @param string  $path
+     * @param Factory $factory
      */
-	public function __construct ($path)
+	public function __construct ($path, Factory $factory)
     {
         $this->path = $path;
+        $this->factory = $factory;
 	}
 
     /**
@@ -211,7 +216,7 @@ class File
 
 			// If only one object in file
 			if ($start_2 === $str_length && $count === 0){
-                $this->item[] = $this->factory->create('Item', [$this, $extr_obj, substr($text, $end+1, $start_2 - $start_1)]);
+                $this->newItem($extr_obj, substr($text, $end+1, $start_2 - $start_1));
 				break;
 			}
 
@@ -221,14 +226,24 @@ class File
 				return sf::setTest(3, $this->ID, __CLASS__, __METHOD__, 'More than 5000 objects in file.');
 
 			// Create new item object
-			$this->item[] = $this->factory->create('Item', [$this, $extr_obj, substr($text, $end+1, $start_2 - $start_1)]);
+			$this->newItem($extr_obj, substr($text, $end+1, $start_2 - $start_1));
 			sf::setTest(1, 'Loaded object :'.implode($extr_obj));
 		}
 		sf::setTest(1, 'Loaded '.$count.' objects.');
-		//echo ('<br>Echo 3 (counter): '. count($this->item).'<br>');
-		if (!count($this->item))
+		//echo ('<br>Echo 3 (counter): '. count($this->items).'<br>');
+		if (!count($this->items))
 			return false;
 		return $this;
 	}
+
+    public function newItem($sObj, $text)
+    {
+        if (!(is_array($sObj) && is_string($text)))
+            return false;
+
+        $item = new Item($this, $sObj, $text);
+        $this->items[] = $item;
+        return $item;
+    }
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Src\DFParser;
+namespace app\Src;
 
 class sf
 {

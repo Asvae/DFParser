@@ -1,13 +1,15 @@
 <?php
 
-class FactoryTest extends TestCase {
+namespace App\Src;
+
+class FactoryTest extends \TestCase {
 
     protected $factory;
 
     public function setUp()
     {
         parent::setUp();
-        $this->factory = new App\Src\Factory;
+        $this->factory = new Factory;
     }
 
     public function tearDown()
@@ -19,40 +21,19 @@ class FactoryTest extends TestCase {
     public function it_is_initializable()
     {
         $this->assertInstanceOf('App\Src\Factory', $this->factory);
-	}
-
-    /** @test **/
-    public function it_creates_object_of_given_class()
-    {
-        $className = 'Faker\Factory';
-        $class = $this->factory->create($className);
-        $this->assertInstanceOf($className, $class);
-
     }
 
     /** @test **/
-    public function it_links_created_objects()
+    public function it_creates_file()
     {
-        $className = 'Faker\Factory';
-        $this->factory->create($className);
-        $this->assertInstanceOf($className, $this->factory->link[0]);
-    }
+        $real_path = '/home/vagrant/Code/DFParser\tests/raw/short/item_tool.txt';
+        $real = $this->factory->newFile($real_path);
+        $this->assertInstanceOf('App\Src\File',$real);
 
-    /** @test **/
-    public function it_validates_input()
-    {
-        $this->assertFalse($this->factory->create('NotAClassName'));
-        $this->assertFalse($this->factory->create('Asva\DFParser\File',
-            ['path'=>'InvalidPath']));
-    }
+        $foul = $this->factory->newFile('wrong/path');
+        $this->assertFalse($foul);
 
-    /** @test **/
-    public function it_gets_file_from_string()
-    {
-        $factory = $this->factory;
-        $path = '/home/vagrant/Code/dfparser/spec/test_raws/item_tool.txt';
-        $file = $factory->getFile($path);
-        $this->assertInstanceOf('Asva\DFParser\File', $file);
+        $this->assertEquals($real, $this->factory->files[0]);
     }
 
     /** @test **/
@@ -68,4 +49,5 @@ class FactoryTest extends TestCase {
         $files = $factory->loadFilesWithToken($token);
         $this->assertNotEmpty($files);
     }
+
 }

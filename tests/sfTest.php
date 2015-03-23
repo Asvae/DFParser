@@ -1,7 +1,5 @@
 <?php
 
-namespace Asva\DFParser;
-
 use Illuminate\Support\Facades\Config;
 
 class sfTest extends \TestCase

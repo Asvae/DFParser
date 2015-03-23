@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Src\DFParser;
+namespace App\Src;
 
 /**
  * Item class which corresponds to single OBJECT
@@ -30,14 +30,14 @@ class Item
     protected $filters;
 
     /**
-     * @param File   $file       parent reference
-     * @param array  $array_obj  type of object
-     * @param string $text       file text
+     * @param File   $file parent reference
+     * @param array  $sObj type of object
+     * @param string $text file text
      */
-	public function __construct (File $file, Array $array_obj, $text) {
+	public function __construct (File $file, Array $sObj, $text) {
 
 		$this->file = $file;
-		$this->sObj = $array_obj;
+		$this->sObj = $sObj;
 		$this->text = $text;
 
         $item_type = strtolower($file->bObj['string']);
