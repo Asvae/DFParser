@@ -2,6 +2,8 @@
 
 namespace App\Src;
 
+use App\Src\Factory;
+
 /**
  * Class File stands for single txt file.
  * 
@@ -20,11 +22,7 @@ class File
 	public function __construct ($path)
     {
         $this->path = $path;
-	}
-
-    public function getFactory(Factory $factory)
-    {
-        return $factory;
+        $this->factory = new Factory;
     }
 
     /**

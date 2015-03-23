@@ -39,6 +39,7 @@ class Item
 		$this->file = $file;
 		$this->sObj = $sObj;
 		$this->text = $text;
+        $this->factory = $file->factory;
 
         $item_type = strtolower($file->bObj['string']);
         $this->filters = \Config::get('constants.filters_'.$item_type);
@@ -57,10 +58,11 @@ class Item
     public function process()
     {
         $filters = $this->filters;
+
         foreach ($filters as $key => $filter) {
             $param = &$this->$key;
 
-            if (! isset($param['array'],$param['string']) || isset($param['html']))
+            if (! isset($param['array'], $param['string']) || isset($param['html']))
                 continue;
             $method = sf::snakeToCamel('html_' . $key);
 
@@ -387,9 +389,9 @@ class Item
             else
             {
                 $token = 'item_' . strtolower($item[2]);
-                $files = $this->file->getFactory()->loadFilesWithToken($token);
+                $files = $this->factory->loadFilesWithToken($token);
                 foreach($files as $key => $file)
-                    foreach($file->item as $single_item)
+                    foreach($file->items as $single_item)
                         if ($single_item->sObj[1] === $item[3]
                             && isset ($single_item->item_name))
                             $build_item_tmp[$i][] =

@@ -32,7 +32,7 @@ class WorkshopTest extends \TestCase
     /** @test **/
     public function it_is_initializable()
     {
-        $this->assertInstanceOf('Src\App\Item', $this->item);
+        $this->assertInstanceOf('App\Src\Item', $this->item);
     }
 //
     /** @test **/

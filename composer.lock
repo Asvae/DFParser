@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a4c73be26d196672ca333c7cad5fb936",
+    "hash": "d2488db93b1fc31352d027ac162fc8fe",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1022,6 +1022,57 @@
                 "logging"
             ],
             "time": "2015-03-23 10:42:59"
+        },
+        {
+            "name": "raveren/kint",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raveren/kint.git",
+                "reference": "a3bf96302b49d2d0a98964d44a3a43b14a7ee4e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raveren/kint/zipball/a3bf96302b49d2d0a98964d44a3a43b14a7ee4e9",
+                "reference": "a3bf96302b49d2d0a98964d44a3a43b14a7ee4e9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.9-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "Kint.class.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rokas Šleinius",
+                    "homepage": "https://github.com/raveren"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/raveren/kint/contributors"
+                }
+            ],
+            "description": "Kint - debugging helper for PHP developers",
+            "homepage": "https://github.com/raveren/kint",
+            "keywords": [
+                "debug",
+                "kint",
+                "php"
+            ],
+            "time": "2015-02-03 12:50:22"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3049,6 +3100,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "raveren/kint": 20,
         "laracasts/generators": 20
     },
     "prefer-stable": false,
