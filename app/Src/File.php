@@ -2,13 +2,10 @@
 
 namespace App\Src;
 
-
 /**
- * File class which corresponds to txt file.
- * Use File::_new("path") to create object.
- *
- * TODO _new path should be ported to some other place.
- *
+ * Class File stands for single txt file.
+ * 
+ * @package App\Src
  */
 class File
 {
@@ -18,8 +15,6 @@ class File
     public $items = [];
 
     /**
-     * Constructor
-     *
      * @param string  $path
      * @param Factory $factory
      */
@@ -39,7 +34,7 @@ class File
     {
         $this->loadText()
             ->masterworkRawFix()
-            ->fetchObject()
+            ->formArray()
             ->splitByObject();
         return $this;
     }
@@ -52,48 +47,6 @@ class File
     public function loadText () {
         $path = $this->path;
         $this->text = file_get_contents ($path);
-        sf::setTest(1,'File loaded: "'.$this->path.'".');;
-        return $this;
-    }
-
-    /**
-     * Fix corrupted masterwork raws ('!NOFOO!'->'YESFOO[')
-     * TODO Could be simplified by means of regexp
-     *
-     * @return $this
-     */
-    public function masterworkRawFix()
-    {
-        $mw = preg_match("/\\/MW\\//", $this->path, $matches);
-
-        if ( ! $mw)
-            return $this;
-
-        $start = $end = 0;
-        if(strpos($this->text,'!NO',$start) === FALSE)
-            return $this;
-
-
-        $words = array('corrupted' => array(), 'fixed' => array());
-
-        while(true)
-        {
-            $start = strpos($this->text,'!NO',$start);
-            $end = strpos($this->text, '!', $start+1);
-            if ($start === FALSE or $end === FALSE or $end-$start > 30)
-                break;
-            $words['corrupted'][] = substr($this->text,$start,$end-$start+1);
-
-            $start = $end;
-
-        }
-
-        foreach ($words['corrupted'] as $key=>$word)
-            $words['fixed'][$key] = "YES".substr($word,3,-1).'[';
-
-        $this->text = str_replace($words['corrupted'], $words['fixed'], $this->text);
-
-        sf::setTest(1, 'MW real fixed');
         return $this;
     }
 
@@ -103,7 +56,7 @@ class File
      *
      * @return $this|bool
      */
-    public function fetchObject()
+    public function formArray()
     {
         $text = $this->text;
         $start = strpos($text, '[OBJECT:') + 8;
@@ -115,7 +68,7 @@ class File
         $this->text = str_replace('[OBJECT:'. $string. ']', "", $text);
 
         // make array from object, allowing comparison with actual tags
-        ## source: http://dwarffortresswiki.org/index.php/DF2012:Raw_file
+        // check http://dwarffortresswiki.org/index.php/DF2012:Raw_file
 
         $a = [
             'BUILDING' => ['BUILDING_FURNACE', 'BUILDING_WORKSHOP'],
@@ -137,12 +90,12 @@ class File
     }
 
     /**
-     * Strips valuable part from raw name.
+     * Extracts token from path string
      * Example: objects\item_tool_gnome.txt -> item_tool
      *
      * @return string|bool
      */
-    public function takeItemNameFromPath()
+    public function getTokenFromPath()
     {
         $path = $this->path;
         $pattern = '/item_[a-z]+/';
@@ -150,7 +103,7 @@ class File
             return $match;
     }
 
-     /**
+    /**
      * Create multiple Item instances from text of single one.
      * If only_object is set, function won't split but only_object.
      *
@@ -236,14 +189,62 @@ class File
 		return $this;
 	}
 
+    /**
+     * Fix corrupted masterwork raws ('!NOFOO!'->'YESFOO[')
+     * TODO Could be improved by means of regexp
+     *
+     * @return $this
+     */
+    public function masterworkRawFix()
+    {
+        $mw = preg_match("/\\/MW\\//", $this->path, $matches);
+
+        if ( ! $mw)
+            return $this;
+
+        $start = $end = 0;
+        if(strpos($this->text,'!NO',$start) === FALSE)
+            return $this;
+
+
+        $words = array('corrupted' => array(), 'fixed' => array());
+
+        while(true)
+        {
+            $start = strpos($this->text,'!NO',$start);
+            $end = strpos($this->text, '!', $start+1);
+            if ($start === FALSE or $end === FALSE or $end-$start > 30)
+                break;
+            $words['corrupted'][] = substr($this->text,$start,$end-$start+1);
+
+            $start = $end;
+
+        }
+
+        foreach ($words['corrupted'] as $key=>$word)
+            $words['fixed'][$key] = "YES".substr($word,3,-1).'[';
+
+        $this->text = str_replace($words['corrupted'], $words['fixed'], $this->text);
+
+        sf::setTest(1, 'MW real fixed');
+        return $this;
+    }
+
+    /**
+     * Create new Item and link it to file
+     *
+     * @param $sObj
+     * @param $text
+     *
+     * @return Item
+     */
     public function newItem($sObj, $text)
     {
-        if (!(is_array($sObj) && is_string($text)))
+        if (! (is_array($sObj) && is_string($text)))
             return false;
-
         $item = new Item($this, $sObj, $text);
         $this->items[] = $item;
-        return $item;
+        return ($item);
     }
 }
 

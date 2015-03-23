@@ -1,13 +1,13 @@
 <?php
 
-namespace Asva\DFParser;
+namespace App\Src;
 
 class ItemTest extends \TestCase
 {
 
     /**
      * Don not consider those tests real.
-     * They simply signify that everything is more-less ok.
+     * They only state everything is more-less OK.
      * For details just eye your output.
      */
 
@@ -17,10 +17,10 @@ class ItemTest extends \TestCase
     {
         parent::setUp();
         $factory = new Factory();
-        $path = '/home/vagrant/Code/dfparser/spec/test_raws/item_tool.txt';
-        $file = $factory->create('Asva\DFParser\File', ['path'=>$path]);
+        $path = '/home/vagrant/Code/DFParser/tests/raw/short/item_tool.txt';
+        $file = $factory->newFile($path);
         $file->loadEverything();
-        $this->item = $file->item[0];
+        $this->item = $file->items[0];
         $this->item->process();
     }
 
@@ -32,7 +32,7 @@ class ItemTest extends \TestCase
     /** @test **/
     public function it_is_initializable()
     {
-        $this->assertInstanceOf('Asva\DFParser\Item', $this->item);
+        $this->assertInstanceOf('App\Src\Item', $this->item);
     }
 
     /** @test **/
