@@ -187,6 +187,8 @@ class File
     public function masterworkRawFix()
     {
         $mw = preg_match("/\\/MW\\//", $this->path, $matches);
+        // !!!! TEMPORARY !!!!
+        $mw = true;
 
         if ( ! $mw)
             return $this;

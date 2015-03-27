@@ -52,9 +52,7 @@ class sf
             switch ($pattern_depth) {
             case 0:
             case 1:
-                if (count($data) > 1) {
-                    $data = implode($data, $pattern);
-                }
+                $data = implode($data, $pattern);
                 return $data;
             case 2:
                 $end = count($pattern) - 1;

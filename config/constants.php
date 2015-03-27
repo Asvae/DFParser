@@ -29,7 +29,7 @@ return [
     'filters_building' => [
 
         'block'         => '/(\[BLOCK(:\d)+\][\n\s]*)+/',
-        'build_item'    => '/(\[BUILD_ITEM:\d(:\w+)+\][\n\s\$]*)+/',
+        'build_item'    => '/(\[BUILD_ITEM:\d(:\w+)+\][_\n\s\$]*)+/',
         'build_key'     => '/\[BUILD_KEY:\w+\]/',
         'build_labor'   => '/\[BUILD_LABOR:\w+\]/',
         'color'         => '/(\[COLOR(:\d)+\][\n\s]*)+/',
@@ -50,14 +50,14 @@ return [
         'product'       => '/\[PRODUCT(?::[A-Z0-9]+){2,}\](?:\[(?:FORCE_EDGE|PRODUCT_PASTE|PRODUCT_PRESSED|PRODUCT_DIMENSION|PRODUCT_TO_CONTAINER)[A-Z0-9:_]*\]\s*)*/',
         'improvement'   => '/\[IMPROVEMENT(?::[A-Za-z0-9_]*){1,}\]/',
         'skill'         => '/\[SKILL:[A-Z0-9_]+\]/',
-        'modifiers'  => '/\[(?:ADVENTURE_MODE_ENABLED|AUTOMATIC|FUEL)\]/',
+        'modifiers'     => '/\[(?:ADVENTURE_MODE_ENABLED|AUTOMATIC|FUEL)\]/',
     ],
 
     'filters_item' => [
         'item_name'     => '/\[NAME:[\w\)\(\s=:]+\]/',
         'value'         => '/\[VALUE:[0-9]+\]/',
         'tile'          => '/\[TILE:[0-9]+\]/',
-        'modifiers'  => '/\[(?:HARD_MAT|METAL_MAT|METAL_WEAPON_MAT|UNIMPROVABLE)\]/',
+        'modifiers'     => '/\[(?:HARD_MAT|METAL_MAT|METAL_WEAPON_MAT|UNIMPROVABLE)\]/',
         // Not every token was included
     ],
 
@@ -76,9 +76,9 @@ return [
             ["<td style=\"color: ','; padding: 0\">",'</td>'],
             ["<table border=0 cellpadding=0 cellspacing=0 style=\" font-size:150%; font-family: monospace; font-weight:bold\"><tr>",'</tr><tr>',"</tr></table>"]
         ],
-        'dim'           => ['<p>','x','</p>'],
+        'dim'           => 'x',
         'name'          => '',
-        'name_color'    => ['(',')'],
+        'name_color'    => '',
 
         // Reaction patterns
 

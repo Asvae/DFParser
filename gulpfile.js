@@ -12,11 +12,11 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.sass("app.sass")
-        .phpUnit();
+
+    mix.scripts([
+        'bootstrap-sass-official/dist/jquery.js'
+    ], 'public/js/vendor.js', 'resources/assets/bower_components/').version('public/js/vendor.js');
+
+    //mix.sass("vendor/bower_components/bootstrap-sass-official/", 'app.css');
 
 });
-
-// 77.53 было
-// 2  260
-// 77.38
