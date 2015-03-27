@@ -64,21 +64,20 @@ return [
     'patterns' => [
 
         // Workshop patterns
-        'block'         => [
-            ['<tr><td style="color: ','; padding: 0">X</td><td style="color: ','; padding: 0">X</td></tr>'],
-            ['<table style="font-family: monospace; font-weight: bold; font-size: 135%; border: 1px solid #0b0; background: #dfd">','</table>'],
+        'name'          => '',
+        'color'         => [
+            ['<td style = "color: ','; background:','"">','</td>'],
+            '',
+            ['<table><tr>','</tr><tr>','</tr></table>'],
         ],
-        'build_item'    => [ ['<p>[',':',']</p>'], [] ],
+        'block'         => [
+            ['<tr><td style="color: ','">X</td><td style="color: ',';">X</td></tr>'],
+            ['<table>','</table>'],
+        ],
+        'build_item'    => [ ['<p>',' ','</p>'], ',' ],
         'build_key'     => '+',
         'build_labor'   => '',
-        'color'         => [
-            ['<span style="color: ','; background:','">','</span>'],
-            ["<td style=\"color: ','; padding: 0\">",'</td>'],
-            ["<table border=0 cellpadding=0 cellspacing=0 style=\" font-size:150%; font-family: monospace; font-weight:bold\"><tr>",'</tr><tr>',"</tr></table>"]
-        ],
         'dim'           => 'x',
-        'name'          => '',
-        'name_color'    => '',
 
         // Reaction patterns
 

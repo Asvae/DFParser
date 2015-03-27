@@ -1,3 +1,42 @@
-body {
-  color: #00b3ee;
+@import "bootstrap";
+
+div.df.item {
+  $back: #22c2ff;
+//  clear: left;
+  display: table;
+//  padding: 10px;
+  margin: 10px;
+//  width: max-content;
+//  height: max-content;
+
+  background-color: lighten($back, 30);
+
+  div{
+    &:hover{
+      background-color: lighten($back, 20);;
+    }
+
+    display: inline-block;
+
+//    display: block;
+//    float: left;
+//    height: max-content;
+    width: max-content;
+  }
+
+  table{
+    padding: 0;
+    border: 0;
+    line-height: 1;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 135%;
+  }
+
+  div.block table{
+    border: 1px solid #0b0;
+    background: #dfd;
+  }
+
+
 }

@@ -9,15 +9,14 @@
             <div class="panel-body">
                 @if($data)
                     @foreach ($data as $item)
-                        <div class="item">
+                        <div class="df item row">
                             @foreach ($item as $key=>$value)
-                                    @include('dfparser.workshop.partials.item', ['name' => $key, 'item' => $value])
-
+                                @include('dfparser.workshop.partials.item', ['name' => $key, 'item' => $value])
                             @endforeach
                         </div>
                     @endforeach
                 @else
-                    Nothing be found from that entry.
+                    Nothing to be found from that entry.
                 @endif
             </div>
 

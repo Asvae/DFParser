@@ -249,8 +249,10 @@ class Item {
 
                 foreach (range(3, 9) as $j => $key)
                 {
+                    // !!!TEMPORARY!!!
+                    // !!!BUG!!!
                     if (!isset ($row[$key]))
-                        dd($this);
+                        continue;
                     $output[$i][$j][2] = $unicode[$row[$key]];
                 }
                 $i++;

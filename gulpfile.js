@@ -13,10 +13,19 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
 
-    mix.scripts([
-        'bootstrap-sass-official/dist/jquery.js'
-    ], 'public/js/vendor.js', 'resources/assets/bower_components/').version('public/js/vendor.js');
+    var paths = {
+        'jquery': './vendor/bower_components/jquery/',
+        'bootstrap': './vendor/bower_components/bootstrap-sass-official/assets/'
+    }
 
-    //mix.sass("vendor/bower_components/bootstrap-sass-official/", 'app.css');
+    elixir(function(mix) {
+        mix.sass("app.scss", 'public/css/', {includePaths: [paths.bootstrap + 'stylesheets/']})
+            .copy(paths.bootstrap + 'fonts/bootstrap/**', 'public/fonts')
+            .scripts([
+                paths.jquery + "dist/jquery.js",
+                paths.bootstrap + "javascripts/bootstrap.js"
+            ], 'public/js/vendor.js', './')
+            .version(["public/css/app.css","public/js/vendor.js"]);
+    });
 
 });

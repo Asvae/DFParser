@@ -21,7 +21,7 @@ class WorkshopController extends Controller {
 
 
 //
-//        $data = '<p>'.implode($data,'</p><p>').'</p>';
+        $data = [];
         $items = Dfparser::all(['item','json'])->toArray();
 
         foreach ($items as $item)
