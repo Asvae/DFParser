@@ -3,9 +3,9 @@
 div.df.item {
   $back: #22c2ff;
 //  clear: left;
-  display: table;
+//  width: 100%;
 //  padding: 10px;
-  margin: 10px;
+  margin-bottom: 10px;
 //  width: max-content;
 //  height: max-content;
 
@@ -16,12 +16,10 @@ div.df.item {
       background-color: lighten($back, 20);;
     }
 
-    display: inline-block;
-
+    display: table-cell;
 //    display: block;
 //    float: left;
-//    height: max-content;
-    width: max-content;
+    height: 100%;
   }
 
   table{
